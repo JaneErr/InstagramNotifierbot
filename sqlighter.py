@@ -6,7 +6,11 @@ class SQLighter:
 
     def __init__(self):
         self.connections = sqlite3.connect(self.database_file)
-        self.cursor = self.connections.cursor()
+        with self.connections:
+            self.cursor = self.connections.cursor()
+            self.cursor.execute('CREATE TABLE IF NOT EXISTS instagram_users (id INTEGER PRIMARY KEY,instagram_username VARCHAR (255) NOT NULL,last_post_id VARCHAR (255) NOT NULL,instagram_user_id VARCHAR (255) NOT NULL);')
+            self.cursor.execute('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY,user_id VARCHAR (255) NOT NULL);')
+            self.cursor.execute('CREATE TABLE IF NOT EXISTS subscriptions (user_id INTEGER REFERENCES users (id),instagram_id INTEGER REFERENCES instagram_users (id));')
 
     def user_exists(self, user_id):
         with self.connections:
