@@ -13,7 +13,7 @@ from instagramwebapi import InstagramWebApi
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token="1277931217:AAE9F3m_XTEG0KYt6nec3cRG06YMN1uPuVU")
+bot = Bot(token="")
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 
